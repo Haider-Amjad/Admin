@@ -18,10 +18,11 @@ export class UsersEditComponent implements OnInit {
   isRequested = true;
 
   userId;
+  email;
   userForm: FormGroup;
 
   branches = [];
-  types = [];
+  services = [];
 
   isPasswordValidated = true;
 
@@ -29,8 +30,8 @@ export class UsersEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private api: RestApiService, private helper: HelperService,
     private auth: AuthService, private router: Router, private activeModal: NgbActiveModal) {
-    if (this.auth.user.UserID) {
-      this.userId = this.auth.user.UserID;
+    if (this.auth.user.email) {
+      this.email = this.auth.user.email;
     } else {
       this.router.navigateByUrl('auth/login');
     }
@@ -44,13 +45,12 @@ export class UsersEditComponent implements OnInit {
     this.getUsersData();
 
     this.userForm = this.fb.group({
-      updaterUserId: [this.userId, Validators.required],
-      userId: [this.user.UserRecId, Validators.required],
-      fullName: [this.user.UserName, Validators.required],
-      userTypeId: [this.user.UserTypeId, Validators.required],
-      branchId: [this.user.BranchId, Validators.required],
-      locked: [this.user.Locked.toString(), Validators.required],
-      username: [this.user.UserId, Validators.required],
+      name: [this.user.name, Validators.required],
+      contact: [this.user.contact, Validators.required],
+      category: [this.user.category, Validators.required],
+      address: [this.user.address, Validators.required],
+      state: [this.user.state.toString(), Validators.required],
+      email: [this.user.email, Validators.required],
       newPassword: [''],
       confirmPassword: [''],
     });
@@ -60,10 +60,10 @@ export class UsersEditComponent implements OnInit {
   get f() { return this.userForm.controls; }
 
   getUsersData() {
-    this.api.get('Users/GetData').then((data: any) => {
-      // console.log('Data', data);
-      this.branches = data.branches;
-      this.types = data.types;
+    this.api.get('get_serviceCategory').then((data: any) => {
+      console.log('Data', data);
+      this.services = data.name;
+    console.log("services",data.name)
       this.isDataLoaded = true;
     }).catch(err => console.log('Error', err));
   }

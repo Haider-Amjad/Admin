@@ -1,7 +1,7 @@
 <div class="modal-header">
   <h5 class="modal-title" id="exampleModalLabel2">
     <span *ngIf="!isDataLoaded">Please wait...</span>
-    <span *ngIf="isDataLoaded">Updation {{user.UserName}}'s Accout</span></h5>
+    <span *ngIf="isDataLoaded">Updation {{user.name}} Accout</span></h5>
   <button type="button" class="close" (click)="closeMe()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -34,68 +34,83 @@
           <!-- Full Name -->
           <div class="form-row">
             <div class="col-12 mb-3">
-              <label for="fullName">Full Name</label>
-              <input type="text" class="form-control input-air-primary" id="fullName" formControlName="fullName"
-                [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" autocomplete="new-password">
+              <label for="name">Full Name</label>
+              <input type="text" class="form-control input-air-primary" id="name" formControlName="name"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" autocomplete="new-password">
 
-              <div *ngIf="submitted && f['fullName'].errors" class="text text-danger">
-                <div *ngIf="f['fullName'].errors.required">Required</div>
+              <div *ngIf="submitted && f['name'].errors" class="text text-danger">
+                <div *ngIf="f['name'].errors.required">Required</div>
               </div>
             </div>
           </div>
 
-          <!-- User Type -->
+
+          <!-- Contact Number -->
           <div class="form-row">
             <div class="col-12 mb-3">
-              <label for="userTypeId">User Type</label>
-              <select class="form-control input-air-primary" id="userTypeId" formControlName="userTypeId"
-                [ngClass]="{ 'is-invalid': submitted && f.userTypeId.errors }">
-                <option value="">Select Type</option>
-                <option *ngFor="let type of types" value="{{type.UserTypeId}}">{{type.UserTypeName}}
+              <label for="contact">Contact Number</label>
+              <input type="text" class="form-control input-air-primary" id="contact" formControlName="contact"
+                [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" autocomplete="new-password">
+
+              <div *ngIf="submitted && f['contact'].errors" class="text text-danger">
+                <div *ngIf="f['name'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category -->
+          <div class="form-row">
+            <div class="col-12 mb-3">
+              <label for="category">Category</label>
+              <select class="form-control input-air-primary" id="category" formControlName="category"
+                [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+                <option value="">Select Category</option>
+                <option *ngFor="let service of services" value="{{service.category}}">{{service.category}}
                 </option>
               </select>
 
-              <div *ngIf="submitted && f['userTypeId'].errors" class="text text-danger">
-                <div *ngIf="f['userTypeId'].errors.required">Required</div>
+              <div *ngIf="submitted && f['category'].errors" class="text text-danger">
+                <div *ngIf="f['category'].errors.required">Required</div>
               </div>
             </div>
           </div>
 
-          <!-- Branch -->
+
+          <!-- Address -->
           <div class="form-row">
             <div class="col-12 mb-3">
-              <label for="branchId">Branch</label>
-              <select class="form-control input-air-primary" id="branchId" formControlName="branchId"
-                [ngClass]="{ 'is-invalid': submitted && f.branchId.errors }">
-                <option value="">Select Region</option>
-                <option *ngFor="let branch of branches" value="{{branch.BranchId}}">{{branch.BranchName}}</option>
-              </select>
+              <label for="address">Address</label>
+              <input type="text" class="form-control input-air-primary" id="address" formControlName="address"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" autocomplete="new-password">
 
-              <div *ngIf="submitted && f['branchId'].errors" class="text text-danger">
-                <div *ngIf="f['branchId'].errors.required">Required</div>
+              <div *ngIf="submitted && f['address'].errors" class="text text-danger">
+                <div *ngIf="f['address'].errors.required">Required</div>
               </div>
             </div>
           </div>
 
-          <!-- Status -->
+
+
+
+          <!-- State -->
 
           <div class="form-row">
             <div class="col-12 mb-3">
-              <label for="branchId">Status</label>
+              <label for="state">State</label>
 
               <div class="form-group m-checkbox-inline mb-0 custom-radio-ml">
                 <div class="radio radio-primary">
-                  <input type="radio" name="locked" id="radioinline1" value="false" formControlName="locked">
+                  <input type="radio" name="state" id="radioinline1" value="false" formControlName="state">
                   <label for="radioinline1" class="mb-0">Active</label>
                 </div>
                 <div class="radio radio-primary">
-                  <input type="radio" name="locked" id="radioinline2" value="true" formControlName="locked">
+                  <input type="radio" name="state" id="radioinline2" value="true" formControlName="state">
                   <label for="radioinline2" class="mb-0">Blocked</label>
                 </div>
               </div>
 
-              <div *ngIf="submitted && f['locked'].errors" class="text text-danger">
-                <div *ngIf="f['locked'].errors.required">Required</div>
+              <div *ngIf="submitted && f['state'].errors" class="text text-danger">
+                <div *ngIf="f['state'].errors.required">Required</div>
               </div>
             </div>
           </div>
@@ -105,15 +120,15 @@
         <!-- Right Section -->
         <div class="col-6">
 
-          <!-- Username (Login) -->
+          <!-- Email -->
           <div class="form-row">
             <div class="col-12 mb-3">
-              <label for="username">Username (Login)</label>
-              <input type="text" class="form-control input-air-primary" id="username" formControlName="username"
-                [ngClass]="{ 'is-invalid': submitted && f.username.errors }" autocomplete="new-password">
+              <label for="email">Email (Login)</label>
+              <input type="text" class="form-control input-air-primary" id="email" formControlName="email"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" autocomplete="new-password">
 
-              <div *ngIf="submitted && f['username'].errors" class="text text-danger">
-                <div *ngIf="f['username'].errors.required">Required</div>
+              <div *ngIf="submitted && f['email'].errors" class="text text-danger">
+                <div *ngIf="f['email'].errors.required">Required</div>
               </div>
             </div>
           </div>
