@@ -43,9 +43,9 @@ export class RestApiService {
     });
   }
 
-  patch(path, data) {
+  patch(path,email, data) {
     return new Promise((resolve, reject) => {
-      this.http.patch(environment.apiURL + '/' + path, data).subscribe((response: any) => {
+      this.http.patch(environment.apiURL + '/' + path+email, data).subscribe((response: any) => {
         resolve(response);
       }, (error: any) => {
         reject(error);

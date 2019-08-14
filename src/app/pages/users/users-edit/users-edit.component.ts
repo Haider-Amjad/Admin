@@ -17,12 +17,15 @@ export class UsersEditComponent implements OnInit {
   isDataLoaded = false;
   isRequested = true;
 
+
   userId;
   email;
   userForm: FormGroup;
 
   branches = [];
   services = [];
+
+  status = [];
 
   isPasswordValidated = true;
 
@@ -41,8 +44,15 @@ export class UsersEditComponent implements OnInit {
 
     this.submitted = false;
     this.isDataLoaded = false;
+    
+    this.status = [
+      { name:"pending"},
+      { name:"approved"},
+      { name:"blocked"}
+    ]
 
     this.getUsersData();
+
 
     this.userForm = this.fb.group({
       name: [this.user.name, Validators.required],
@@ -51,6 +61,8 @@ export class UsersEditComponent implements OnInit {
       address: [this.user.address, Validators.required],
       state: [this.user.state.toString(), Validators.required],
       email: [this.user.email, Validators.required],
+      lat: [this.user.location.lat, Validators.required],
+      long: [this.user.location.long, Validators.required],
       newPassword: [''],
       confirmPassword: [''],
     });
@@ -60,10 +72,19 @@ export class UsersEditComponent implements OnInit {
   get f() { return this.userForm.controls; }
 
   getUsersData() {
+    
     this.api.get('get_serviceCategory').then((data: any) => {
       console.log('Data', data);
-      this.services = data.name;
-    console.log("services",data.name)
+      let i=0;
+      this.services=data;
+      // for(i;i<data.length;i++)
+      // {
+      //   this.categories[i] = data[i].name;
+      //   // this.services[i] = data[i].name;
+      //   // console.log("service",data[i].name)
+      // }
+
+      console.log("All services",this.services)
       this.isDataLoaded = true;
     }).catch(err => console.log('Error', err));
   }
@@ -83,8 +104,8 @@ export class UsersEditComponent implements OnInit {
       if (this.isPasswordValidated) {
 
         this.isRequested = false;
-        const userName = this.user.UserName;
-        const username = this.userForm.controls['username'].value;
+        const userName = this.user.name;
+        const username = this.userForm.controls['name'].value;
         this._sendUpdateRequest(this.userForm.value, userName, username);
 
       }
@@ -93,7 +114,7 @@ export class UsersEditComponent implements OnInit {
   }
 
   _sendUpdateRequest(data, userName, username) {
-    this.api.post('Users/Update', data).then((response: any) => {
+    this.api.patch('update_serviceProvider/', this.email, data).then((response: any) => {
 
       this.isRequested = true;
       this.helper.successBigToast('Success', 'Successfully updated: ' + userName + '\'s Account');
@@ -103,7 +124,7 @@ export class UsersEditComponent implements OnInit {
       this.isRequested = true;
 
       if (error.error.Message) {
-        if (error.error.Message === 'Already Exists') {
+        if (error.error.Message === 'Already Exists') { 
           // tslint:disable-next-line: max-line-length
           this.helper.failureBigToast('Failed!', '"' + username + '" is already assigned to another user, kindly user different username for login.');
           return;
