@@ -44,7 +44,7 @@ export class UsersEditComponent implements OnInit {
 
     this.submitted = false;
     this.isDataLoaded = false;
-    
+
     this.status = [
       { name:"pending"},
       { name:"approved"},
@@ -72,7 +72,7 @@ export class UsersEditComponent implements OnInit {
   get f() { return this.userForm.controls; }
 
   getUsersData() {
-    
+
     this.api.get('get_serviceCategory').then((data: any) => {
       console.log('Data', data);
       let i=0;
@@ -114,6 +114,7 @@ export class UsersEditComponent implements OnInit {
   }
 
   _sendUpdateRequest(data, userName, username) {
+    console.log("Req",data)
     this.api.patch('update_serviceProvider/', this.email, data).then((response: any) => {
 
       this.isRequested = true;
@@ -124,7 +125,7 @@ export class UsersEditComponent implements OnInit {
       this.isRequested = true;
 
       if (error.error.Message) {
-        if (error.error.Message === 'Already Exists') { 
+        if (error.error.Message === 'Already Exists') {
           // tslint:disable-next-line: max-line-length
           this.helper.failureBigToast('Failed!', '"' + username + '" is already assigned to another user, kindly user different username for login.');
           return;
