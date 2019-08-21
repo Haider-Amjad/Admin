@@ -17,17 +17,23 @@ export class UsersListComponent implements OnInit {
   userId;
   users = [];
 
+  
+
   dtOptions: DataTables.Settings = {};
+
 
   constructor(private api: RestApiService, private router: Router, private helper: HelperService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    console.log("ngOnInit called")
     this.getUsers();
   }
+
 
   getUsers() {
     this.api.get('get_serviceProvider').then((response: any) => {
       this.users = response;
+
 
       this.dtOptions = {
         data: this.users,
@@ -92,6 +98,7 @@ export class UsersListComponent implements OnInit {
     const modalRef = this.modalService.open(UsersEditComponent);
     modalRef.componentInstance.user = user;
 
-    modalRef.result.then(() => { this.ngOnInit(); }, () => { this.ngOnInit(); });
+    modalRef.result.then(() => { window.location.reload() }, () => { window.location.reload()});
+    // modalRef.result.then(() => { this.ngOnInit(); }, () => { this.ngOnInit(); });
   }
 }

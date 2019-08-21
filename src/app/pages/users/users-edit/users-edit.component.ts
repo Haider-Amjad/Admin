@@ -5,7 +5,7 @@ import { HelperService } from 'src/app/services/helper/helper.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { UsersListComponent } from '../users-list/users-list.component';
 @Component({
   selector: 'app-users-edit',
   templateUrl: './users-edit.component.html',
@@ -74,7 +74,7 @@ export class UsersEditComponent implements OnInit {
   getUsersData() {
 
     this.api.get('get_serviceCategory').then((data: any) => {
-      console.log('Data', data);
+      // console.log('Data', data);
       let i=0;
       this.services=data;
       // for(i;i<data.length;i++)
@@ -84,7 +84,7 @@ export class UsersEditComponent implements OnInit {
       //   // console.log("service",data[i].name)
       // }
 
-      console.log("All services",this.services)
+      // console.log("All services",this.services)
       this.isDataLoaded = true;
     }).catch(err => console.log('Error', err));
   }
@@ -120,7 +120,7 @@ export class UsersEditComponent implements OnInit {
 
       this.isRequested = true;
       this.helper.successBigToast('Success', 'Successfully updated: ' + userName + '\'s Account');
-
+      
     }, (error: any) => {
 
       this.isRequested = true;
@@ -135,6 +135,7 @@ export class UsersEditComponent implements OnInit {
 
       this.helper.failureBigToast('Failed!', 'Invalid data, kindly check updated data.');
     });
+
   }
 
   _passwordCheck() {
