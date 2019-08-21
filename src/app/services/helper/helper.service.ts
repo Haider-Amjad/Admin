@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import * as CryptoJS from 'crypto-js';
-import { EncryptionPassword } from 'src/app/constants/constants';
+import { EncryptionPassword } from '../../constants/constants';
 
 @Injectable({
   providedIn: 'root'

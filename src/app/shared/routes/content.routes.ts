@@ -18,6 +18,10 @@ export const content: Routes = [
     loadChildren: './pages/users/users.module#UsersModule'
   },
   {
+    path: 'customers',
+    loadChildren: './pages/customers/customers.module#CustomersModule'
+  },
+  {
     path: 'voucher',
     loadChildren: './pages/vouchers/vouchers.module#VouchersModule'
   },

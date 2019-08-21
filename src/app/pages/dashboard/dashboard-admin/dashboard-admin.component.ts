@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from 'src/app/services/helper/helper.service';
+import { HelperService } from '../../../services/helper/helper.service';
 import * as Chartist from 'chartist';
 import { ChartEvent, ChartType } from 'ng-chartist';
 

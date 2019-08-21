@@ -18,7 +18,8 @@ export const MenuItemsAdmin: Menu[] = [
     title: 'Management', icon: 'icon-package', type: 'sub', children: [
       // { path: '/currencies/list', title: 'Currency Management', type: 'link' },
       // { path: '/accounts/list', title: 'Account Management', type: 'link' },
-      { path: '/users/list', title: 'Service Provider Management', type: 'link' }
+      { path: '/users/list', title: 'Service Provider Management', type: 'link' },
+      { path: '/customers/list', title: 'Customers Management', type: 'link' }
     ]
   },
   // {
