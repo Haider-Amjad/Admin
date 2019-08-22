@@ -31,7 +31,7 @@ export class UsersListComponent implements OnInit {
 
 
   getUsers() {
-    this.api.get('get_serviceProvider').then((response: any) => {
+    this.api.get('get_customer').then((response: any) => {
       this.users = response;
 
 
@@ -45,12 +45,12 @@ export class UsersListComponent implements OnInit {
           }
         },
         {
-          title: 'Address',
-          data: 'address'
+          title: 'Contact',
+          data: 'contact'
         },
         {
-          title: 'Category',
-          data: 'category'
+          title: 'Email',
+          data: 'email'
         },
         {
           title: 'State',
