@@ -110,7 +110,7 @@
           <div class="form-row">
             <div class="col-12 mb-3">
               <label for="email">Email (Login)</label>
-              <input type="text" class="form-control input-air-primary" id="email" formControlName="email"
+              <input type="text" disabled="true" class="form-control input-air-primary" id="email" formControlName="email"
                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }" autocomplete="new-password">
 
               <div *ngIf="submitted && f['email'].errors" class="text text-danger">

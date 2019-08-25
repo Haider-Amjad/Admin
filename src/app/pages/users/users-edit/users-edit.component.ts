@@ -121,6 +121,12 @@ export class UsersEditComponent implements OnInit {
       this.isRequested = true;
       this.helper.successBigToast('Success', 'Successfully updated: ' + userName + '\'s Account');
       
+      setTimeout(() => 
+      {
+        window.location.reload();
+      },
+      3000);
+
     }, (error: any) => {
 
       this.isRequested = true;

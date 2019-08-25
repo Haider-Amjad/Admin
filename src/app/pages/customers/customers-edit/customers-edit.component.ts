@@ -22,8 +22,6 @@ export class UsersEditComponent implements OnInit {
   email;
   userForm: FormGroup;
 
-  branches = [];
-  services = [];
 
   status = [];
 
@@ -51,18 +49,12 @@ export class UsersEditComponent implements OnInit {
       { name:"blocked"}
     ]
 
-    this.getUsersData();
-
 
     this.userForm = this.fb.group({
       name: [this.user.name, Validators.required],
       contact: [this.user.contact, Validators.required],
-      category: [this.user.category, Validators.required],
-      address: [this.user.address, Validators.required],
       state: [this.user.state.toString(), Validators.required],
       email: [this.user.email, Validators.required],
-      lat: [this.user.location.lat, Validators.required],
-      long: [this.user.location.long, Validators.required],
       newPassword: [''],
       confirmPassword: [''],
     });
@@ -71,23 +63,7 @@ export class UsersEditComponent implements OnInit {
 
   get f() { return this.userForm.controls; }
 
-  getUsersData() {
 
-    this.api.get('get_serviceCategory').then((data: any) => {
-      // console.log('Data', data);
-      let i=0;
-      this.services=data;
-      // for(i;i<data.length;i++)
-      // {
-      //   this.categories[i] = data[i].name;
-      //   // this.services[i] = data[i].name;
-      //   // console.log("service",data[i].name)
-      // }
-
-      // console.log("All services",this.services)
-      this.isDataLoaded = true;
-    }).catch(err => console.log('Error', err));
-  }
 
   closeMe() {
     this.activeModal.close();
@@ -116,11 +92,18 @@ export class UsersEditComponent implements OnInit {
   _sendUpdateRequest(data, userName, username) {
     console.log("Req",data)
 
-    this.api.patch('update_serviceProvider/', data.email, data).then((response: any) => {
+    this.api.patch('update_customer/', data.email, data).then((response: any) => {
 
       this.isRequested = true;
       this.helper.successBigToast('Success', 'Successfully updated: ' + userName + '\'s Account');
       
+      
+      setTimeout(() => 
+      {
+        window.location.reload();
+      },
+      3000);
+
     }, (error: any) => {
 
       this.isRequested = true;
@@ -134,6 +117,9 @@ export class UsersEditComponent implements OnInit {
       }
 
       this.helper.failureBigToast('Failed!', 'Invalid data, kindly check updated data.');
+
+      
+
     });
 
   }

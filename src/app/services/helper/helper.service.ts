@@ -29,8 +29,8 @@ export class HelperService {
     Swal({
       type: 'success',
       title: title,
-      text: messsage,
-      showConfirmButton: true,
+      text: messsage
+      // showConfirmButton: true,
     });
   }
   failureBigToast(title, messsage) {

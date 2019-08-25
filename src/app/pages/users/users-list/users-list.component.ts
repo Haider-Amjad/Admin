@@ -98,7 +98,7 @@ export class UsersListComponent implements OnInit {
     const modalRef = this.modalService.open(UsersEditComponent);
     modalRef.componentInstance.user = user;
 
-    modalRef.result.then(() => { window.location.reload() }, () => { window.location.reload()});
+    // modalRef.result.then(() => { window.location.reload() }, () => { window.location.reload()});
     // modalRef.result.then(() => { this.ngOnInit(); }, () => { this.ngOnInit(); });
   }
 }

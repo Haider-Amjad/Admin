@@ -32,10 +32,10 @@ export const MenuItemsAdmin: Menu[] = [
     headTitle: 'Reports'
   },
   {
-    title: 'Accounts Reports', icon: 'icon-files', type: 'sub', children: [
-      { path: '/report/trial-balance', title: 'Trial Balance', type: 'link' },
-      { path: '/report/monthly-profit-loss', title: 'Monthly Profit & Loss', type: 'link' },
-      { path: '/report/balance-sheet', title: 'Balance Sheet', type: 'link' },
+    title: 'Service Provider', icon: 'icon-files', type: 'sub', children: [
+      { path: '/report/booking_wise', title: 'Booking Wise Report', type: 'link' },
+      { path: '/report/rating_wise', title: 'Rating Wise Report', type: 'link' },
+   
     ]
   },
   // {
@@ -80,28 +80,28 @@ export const MenuItemsAdmin: Menu[] = [
 
 
 export const MenuItemsCashier: Menu[] = [
-  {
-    path: '/dashboard/cashier', title: 'Dashboard', icon: 'icon-desktop', type: 'link'
-  },
-  {
-    path: '/currencies/list', title: 'Rates', icon: 'icon-bar-chart', type: 'link'
-  },
-  {
-    headTitle: 'Currency'
-  },
-  {
-    path: '/transactions/bill', title: 'Bill Transaction', icon: 'icon-direction-alt', type: 'link'
-  },
-  {
-    path: '/voucher/generate', title: 'Transfer Voucher', icon: 'icon-agenda', type: 'link'
-  },
-  {
-    headTitle: 'Expenses'
-  },
-  {
-    path: '/voucher/generate', title: 'Double Entry', icon: 'icon-agenda', type: 'link'
-  },
-  {
-    path: '/voucher/generate', title: 'Journal Voucher', icon: 'icon-agenda', type: 'link'
-  }
+  // {
+  //   path: '/dashboard/cashier', title: 'Dashboard', icon: 'icon-desktop', type: 'link'
+  // },
+  // {
+  //   path: '/currencies/list', title: 'Rates', icon: 'icon-bar-chart', type: 'link'
+  // },
+  // {
+  //   headTitle: 'Currency'
+  // },
+  // {
+  //   path: '/transactions/bill', title: 'Bill Transaction', icon: 'icon-direction-alt', type: 'link'
+  // },
+  // {
+  //   path: '/voucher/generate', title: 'Transfer Voucher', icon: 'icon-agenda', type: 'link'
+  // },
+  // {
+  //   headTitle: 'Expenses'
+  // },
+  // {
+  //   path: '/voucher/generate', title: 'Double Entry', icon: 'icon-agenda', type: 'link'
+  // },
+  // {
+  //   path: '/voucher/generate', title: 'Journal Voucher', icon: 'icon-agenda', type: 'link'
+  // }
 ];

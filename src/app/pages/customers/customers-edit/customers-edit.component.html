@@ -1,7 +1,7 @@
 <div class="modal-header">
   <h5 class="modal-title" id="exampleModalLabel2">
-    <span *ngIf="!isDataLoaded">Please wait...</span>
-    <span *ngIf="isDataLoaded">Updation {{user.name}} Accout</span></h5>
+    <!-- <span *ngIf="!isDataLoaded">Please wait...</span> -->
+    <span>Updation {{user.name}} Accout</span></h5>
   <button type="button" class="close" (click)="closeMe()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -10,7 +10,7 @@
   <div class="modal-body">
 
     <!-- Loader  -->
-    <div *ngIf="!isDataLoaded" class="row justify-content-center">
+    <!-- <div *ngIf="!isDataLoaded" class="row justify-content-center">
       <div class="col-2">
         <div class="loader-box">
           <div class="loader">
@@ -21,10 +21,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Records -->
-    <div *ngIf="isDataLoaded">
+    <div>
 
       <div class="row">
 
@@ -43,41 +43,6 @@
               </div>
             </div>
           </div>
-
-
-          <!-- Contact Number -->
-          <div class="form-row">
-            <div class="col-12 mb-3">
-              <label for="contact">Contact Number</label>
-              <input type="text" class="form-control input-air-primary" id="contact" formControlName="contact"
-                [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" autocomplete="new-password">
-
-              <div *ngIf="submitted && f['contact'].errors" class="text text-danger">
-                <div *ngIf="f['contact'].errors.required">Required</div>
-              </div>
-            </div>
-          </div>
-
-
-
-
-            <!-- Location Lat -->
-            <div class="form-row">
-                <div class="col-12 mb-3">
-                  <label for="lat">Latitude</label>
-                  <input type="text" class="form-control input-air-primary" id="lat" formControlName="lat"
-                    [ngClass]="{ 'is-invalid': submitted && f.lat.errors }" autocomplete="new-password">
-    
-                  <div *ngIf="submitted && f['lat'].errors" class="text text-danger">
-                    <div *ngIf="f['lat'].errors.required">Required</div>
-                  </div>
-                </div>
-              </div>
-
-
-
-
-
 
 
           <!-- State -->
@@ -106,11 +71,26 @@
         <!-- Right Section -->
         <div class="col-6">
 
+
+          <!-- Contact Number -->
+          <div class="form-row">
+            <div class="col-12 mb-3">
+              <label for="contact">Contact Number</label>
+              <input type="text" class="form-control input-air-primary" id="contact" formControlName="contact"
+                [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" autocomplete="new-password">
+
+              <div *ngIf="submitted && f['contact'].errors" class="text text-danger">
+                <div *ngIf="f['contact'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
           <!-- Email -->
           <div class="form-row">
             <div class="col-12 mb-3">
               <label for="email">Email (Login)</label>
-              <input type="text" class="form-control input-air-primary" id="email" formControlName="email"
+              <input type="text" disabled="true" class="form-control input-air-primary" id="email" formControlName="email"
                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }" autocomplete="new-password">
 
               <div *ngIf="submitted && f['email'].errors" class="text text-danger">
@@ -121,52 +101,9 @@
 
 
 
-          <!-- Category -->
-          <div class="form-row">
-              <div class="col-12 mb-3">
-                <label for="category">Category</label>
-                <select class="form-control input-air-primary" id="category" formControlName="category"
-                  [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
-                  <option value="">Select Category</option>
-                  <option *ngFor="let service of services" value="{{service.name}}">{{service.name}}
-                  </option>
-                </select>
+     
   
-                <div *ngIf="submitted && f['category'].errors" class="text text-danger">
-                  <div *ngIf="f['category'].errors.required">Required</div>
-                </div>
-              </div>
-            </div>
-  
-  
-  
-            <!-- Location Long -->
-            <div class="form-row">
-              <div class="col-12 mb-3">
-                <label for="long">Longitude</label>
-                <input type="text" class="form-control input-air-primary" id="long" formControlName="long"
-                  [ngClass]="{ 'is-invalid': submitted && f.long.errors }" autocomplete="new-password">
-  
-                <div *ngIf="submitted && f['long'].errors" class="text text-danger">
-                  <div *ngIf="f['long'].errors.required">Required</div>
-                </div>
-              </div>
-            </div>
-
-              <!-- Address -->
-          <div class="form-row">
-              <div class="col-12 mb-3">
-                <label for="address">Address</label>
-                
-                    <textarea type="text" id="address" class="md-textarea md-textarea-auto form-control" formControlName="address"  mdbInput 
-                    [ngClass]="{ 'is-invalid': submitted && f.address.errors }"></textarea>
-  
-  
-                <div *ngIf="submitted && f['address'].errors" class="text text-danger">
-                  <div *ngIf="f['address'].errors.required">Required</div>
-                </div>
-              </div>
-            </div>
+      
 
 
         <!--End Right Section -->
@@ -220,7 +157,7 @@
     </div>
 
   </div>
-  <div *ngIf="isDataLoaded" class="modal-footer">
+  <div class="modal-footer">
 
     <div *ngIf="isRequested">
       <button type="button" class="btn btn-default" (click)="closeMe()">Close</button>
