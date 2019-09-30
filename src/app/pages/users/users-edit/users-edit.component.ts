@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RestApiService } from 'src/app/services/api/rest-api.service';
-import { HelperService } from 'src/app/services/helper/helper.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { RestApiService } from '../../../services/api/rest-api.service';
+import { HelperService } from '../../../services/helper/helper.service';
+import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersListComponent } from '../users-list/users-list.component';
@@ -73,7 +73,7 @@ export class UsersEditComponent implements OnInit {
 
   getUsersData() {
 
-    this.api.get('get_serviceCategory').then((data: any) => {
+    this.api.get('servicecategory/get_serviceCategory').then((data: any) => {
       // console.log('Data', data);
       let i=0;
       this.services=data;
@@ -116,7 +116,7 @@ export class UsersEditComponent implements OnInit {
   _sendUpdateRequest(data, userName, username) {
     console.log("Req",data)
 
-    this.api.patch('update_serviceProvider/', data.email, data).then((response: any) => {
+    this.api.patch('serviceProvider/update_serviceProvider/', data.email, data).then((response: any) => {
 
       this.isRequested = true;
       this.helper.successBigToast('Success', 'Successfully updated: ' + userName + '\'s Account');

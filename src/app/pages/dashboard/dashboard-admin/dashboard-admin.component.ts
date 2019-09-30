@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HelperService } from '../../../services/helper/helper.service';
 import * as Chartist from 'chartist';
 import { ChartEvent, ChartType } from 'ng-chartist';
-import { RestApiService } from 'src/app/services/api/rest-api.service';
+import { RestApiService } from '../../../services/api/rest-api.service';
 
 export interface Chart {
   type: ChartType;
@@ -43,7 +43,7 @@ export class DashboardAdminComponent implements OnInit {
 
   getServiceProviderData() {
 
-    this.api.get('get_serviceProvider').then((data: any) => {
+    this.api.get('serviceProvider/get_serviceProvider').then((data: any) => {
       // console.log('Data', data);
       this.total_serviceProviders=data.length;
       console.log("service Provider"+this.total_serviceProviders);
@@ -52,7 +52,7 @@ export class DashboardAdminComponent implements OnInit {
 
   getCustomerData() {
 
-    this.api.get('get_customer').then((data: any) => {
+    this.api.get('customer/get_customer').then((data: any) => {
       // console.log('Data', data);
       this.total_customers=data.length;
       console.log("customer"+this.total_serviceProviders);
@@ -61,7 +61,7 @@ export class DashboardAdminComponent implements OnInit {
 
   getBookingData() {
 
-    this.api.get('get_booking').then((data: any) => {
+    this.api.get('bookingDetails/get_booking').then((data: any) => {
       // console.log('Data', data);
       this.total_bookings=data.length;
       console.log("booking"+this.total_serviceProviders);
@@ -70,7 +70,7 @@ export class DashboardAdminComponent implements OnInit {
 
   getTournamentData() {
 
-    this.api.get('get_tournament').then((data: any) => {
+    this.api.get('tournament/get_tournament').then((data: any) => {
       // console.log('Data', data);
       this.total_tournaments=data.length;
       console.log("tournament"+this.total_serviceProviders);
