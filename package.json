@@ -4,7 +4,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-   
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -63,6 +62,7 @@
     "ngx-rangeslider-component": "^1.0.6",
     "ngx-store": "^2.1.0",
     "ngx-toastr": "^9.1.2",
+    "ngx-spinner": "^7.2.0",
     "node-sass": "^4.11.0",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.3.3",
