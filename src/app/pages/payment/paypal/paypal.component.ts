@@ -27,6 +27,7 @@ export class PaypalComponent implements OnInit {
   bookingId;
   paymentStatus;
   orderData: any;
+  invalidOrderIdText;
 
     // Paypal Variables
     addScript: boolean = false;
@@ -63,9 +64,9 @@ export class PaypalComponent implements OnInit {
     }
     this.spinner.hide();
     }, () => {
+      this.invalidOrderIdText="invalid";
       this.spinner.hide();
       this.helper.failureBigToast('Failed!', 'Order ID is invalid');
-    
     });
 
   }
@@ -89,7 +90,7 @@ export class PaypalComponent implements OnInit {
 
     this.api.patch('bookingdetails/update_bookingDetails/', this.bookingId, data).then((response: any) => {
 
-      this.helper.successBigToast('Success', 'Successfully Paid for the order no: ' + this.bookingId);
+      this.helper.successBigToast('Success', 'Successfully Paid for the Order');
       
       
       // setTimeout(() => 

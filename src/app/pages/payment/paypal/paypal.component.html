@@ -19,15 +19,17 @@
               <!-- <div class="col-md-12">
                   <img style="width: 180px; height: 180px; margin-bottom: 20px" src="assets/images/logo-light.png" alt="Digital Dairy">
               </div> -->
-            <h4>Digital Dairy - Order Payment</h4>
+            <h4>SPORT-X - Order Payment</h4>
             
             <div>
-                <h5 *ngIf="status != null">Product Name / Qty: {{orderData.productName}} - {{orderData.productQuantity}} </h5>
-                <h5 *ngIf="status != null">Total Price: {{orderData.price}}</h5>
-                <h5 *ngIf="status != null">Payment Status: {{status}}</h5>
-                <h5 *ngIf="status != paid">You have successfully made the payment for this order!!</h5>
+                <h5 *ngIf="paymentStatus != null">Booking Type: {{orderData.bookingType}}</h5>
+                <h5 *ngIf="paymentStatus != null">Booking Date: {{orderData.date}}</h5>
+                <h5 *ngIf="paymentStatus != null">Booking Time: {{orderData.time}} </h5>
+                <h5 *ngIf="paymentStatus != null">Payment Status: {{paymentStatus}}</h5>
+                <h5 *ngIf="paymentStatus == paid">You have successfully made the payment for this order!!</h5>
+                <h5 *ngIf="invalidOrderIdText == 'invalid'">Invalid Order ID</h5>
                 <hr >
-                <h6 *ngIf="status == 'pending' && status != null">Click on the Paypal Icon Below to Pay for you Order (if icon dosen't until 30 seconds kindly swipe down to refresh screen)</h6>
+                <h6 *ngIf="paymentStatus == 'pending' && paymentStatus != null">Click on the Paypal Icon Below to Pay for you Order (if icon dosen't until 30 seconds kindly swipe down to refresh screen)</h6>
             </div>
                
       
