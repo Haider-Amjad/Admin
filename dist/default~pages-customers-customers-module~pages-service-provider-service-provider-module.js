@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~pages-customers-customers-module~pages-users-users-module"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~pages-customers-customers-module~pages-service-provider-service-provider-module"],{
 
 /***/ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js":
 /*!***********************************************************************!*\
@@ -11373,4 +11373,4 @@ var DataTablesModule = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=default~pages-customers-customers-module~pages-users-users-module.js.map
+//# sourceMappingURL=default~pages-customers-customers-module~pages-service-provider-service-provider-module.js.map

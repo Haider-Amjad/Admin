@@ -9,16 +9,5 @@ export const full: Routes = [
     path: 'payment',
     loadChildren: './pages/payment/payment.module#PaymentModule'
   },
-  // {
-  //   path: 'error',
-  //   loadChildren: './pages/error-pages/error-pages.module#ErrorPagesModule'
-  // },
-  // {
-  //   path: 'comingsoon',
-  //   loadChildren: './pages/coming-soon/coming-soon.module#ComingSoonModule'
-  // },
-  // {
-  //   path: 'maintenance',
-  //   loadChildren: './pages/maintenance/maintenance.module#MaintenanceModule'
-  // }
+
 ];

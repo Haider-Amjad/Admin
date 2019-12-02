@@ -29,8 +29,13 @@ export class UsersEditComponent implements OnInit {
 
   @Input() user;
 
-  constructor(private fb: FormBuilder, private api: RestApiService, private helper: HelperService,
-    private auth: AuthService, private router: Router, private activeModal: NgbActiveModal) {
+  constructor(
+    private fb: FormBuilder, 
+    private api: RestApiService, 
+    private helper: HelperService,
+    private auth: AuthService, 
+    private router: Router, 
+    private activeModal: NgbActiveModal) {
     if (this.auth.user.email) {
       this.email = this.auth.user.email;
     } else {
@@ -135,6 +140,11 @@ export class UsersEditComponent implements OnInit {
       }
     }
 
+  }
+
+  viewBookingHistory(customerEmail){
+    this.router.navigate(['customers/booking', customerEmail]);
+    this.activeModal.close();
   }
 
 

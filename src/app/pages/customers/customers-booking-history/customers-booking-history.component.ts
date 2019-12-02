@@ -1,69 +1,89 @@
 import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../../../services/api/rest-api.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { HelperService } from '../../../services/helper/helper.service';
 import { UsersAddComponent } from '../customers-add/customers-add.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersEditComponent } from '../customers-edit/customers-edit.component';
 
 @Component({
-  selector: 'app-customers-list',
-  templateUrl: './customers-list.component.html',
-  styleUrls: ['./customers-list.component.scss']
+  selector: 'app-customers-booking-history',
+  templateUrl: './customers-booking-history.component.html',
+  styleUrls: ['./customers-booking-history.component.scss']
 })
-export class UsersListComponent implements OnInit {
+export class UsersBookingHistoryComponent implements OnInit {
 
   isDataLoaded = false;
   userId;
+  customerEmail;
   users = [];
 
   
-
   dtOptions: DataTables.Settings = {};
 
 
-  constructor(private api: RestApiService, private router: Router, private helper: HelperService, private modalService: NgbModal) { }
+  constructor(
+    private api: RestApiService, 
+    private router: Router, 
+    private route: ActivatedRoute,
+    private helper: HelperService,
+     private modalService: NgbModal
+    ) { 
+          // get customer email from url param 
+          this.customerEmail = this.route.snapshot.paramMap.get("customerEmail");
+          console.log('customerEmail:'+this.customerEmail);
+    }
 
   ngOnInit(): void {
     console.log("ngOnInit called")
-    this.getUsers();
+    this.getUsersBooking();
   }
 
 
-  getUsers() {
-    this.api.get('customer/get_allCustomer').then((response: any) => {
+  getUsersBooking() {
+    this.api.get('bookingdetails/get_customerBookingdetails/'+this.customerEmail).then((response: any) => {
       this.users = response;
 
 
       this.dtOptions = {
         data: this.users,
-        columns: [{
-          title: 'Name',
-          data: 'name',
-          render: function (data, type, row) {
-            return '<span title="' + row.email + '">' + data + '</span>';
-          }
+        columns: [
+        {
+          title: 'Date',
+          data: 'date'
         },
         {
-          title: 'Contact',
-          data: 'contact'
+          title: 'Time',
+          data: 'time'
         },
         {
-          title: 'Email',
-          data: 'email'
+          title: 'Payment Status',
+          data: 'paymentStatus'
         },
         {
-          title: 'State',
+          title: 'Booking Type',
+          data: 'bookingType'
+        },
+        {
+          title: 'Service Provider',
+          data: 'serviceProviderName'
+        },
+        {
+          title: 'Price',
+          data: 'price'
+        },
+        {
+          title: 'Booking State',
           data: 'state',
           render: function (data, type, row) {
-            if (data === "approved") {
-              return '<span class="badge badge-pill badge-success">Approved</span>';
+            if (data === "completed") {
+              return '<span class="badge badge-pill badge-success">Completed</span>';
+            }
+            else if (data === "accepted") {
+              return '<span class="badge badge-pill badge-warning">Accepted</span>';
             }
             else if (data === "pending") {
-              return '<span class="badge badge-pill badge-warning">Pending</span>';
-            }
-            else if (data === "blocked") {
-              return '<span class="badge badge-pill badge-danger">Blocked</span>';
+              return '<span class="badge badge-pill badge-danger">Pending</span>';
             }
             
           }
@@ -73,9 +93,9 @@ export class UsersListComponent implements OnInit {
           // tslint:disable-next-line: deprecation
           $('td', row).unbind('click');
           // tslint:disable-next-line: deprecation
-          $('td', row).bind('click', () => {
-            self.selectedUser(data);
-          });
+          // $('td', row).bind('click', () => {
+          //   self.selectedUser(data);
+          // });
           return row;
         }
       };

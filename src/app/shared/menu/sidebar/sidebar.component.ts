@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItemsAdmin, MenuItemsCashier, Menu } from './sidebar-items';
+import { MenuItemsAdmin, MenuItemsCustomer, Menu } from './sidebar-items';
 import { Router, ActivatedRoute } from "@angular/router";
 import * as $ from 'jquery';
 import { AuthService } from '../../../services/auth/auth.service';
@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
     }
 
     if (role === 1) {
-      this.menuItems = MenuItemsCashier.filter(menuItem => menuItem);
+      this.menuItems = MenuItemsCustomer.filter(menuItem => menuItem);
     }
 
   }

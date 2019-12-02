@@ -160,6 +160,7 @@
   <div class="modal-footer">
 
     <div *ngIf="isRequested">
+        <button type="button" class="btn btn-primary" (click)="viewBookingHistory(user.email)" style="background: #5e7606 !important;">View Booking History</button>
       <button type="button" class="btn btn-default" (click)="closeMe()">Close</button>
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>

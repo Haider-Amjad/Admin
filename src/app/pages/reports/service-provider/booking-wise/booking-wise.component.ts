@@ -16,6 +16,15 @@ export class BookingWise implements OnInit {
   ngOnInit() {
   }
 
-  
+  excelExport(){
+    
+    this.api.getReport('bookingdetails/getBookingReport').then((response: any) => {
+    
+    }, () => {
+      
+      this.helper.successToast('Success!', 'Booking Data is Exported in Excel');
+    });
+
+  }
 
 }

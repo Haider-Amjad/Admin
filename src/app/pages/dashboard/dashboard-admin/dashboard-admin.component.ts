@@ -52,7 +52,7 @@ export class DashboardAdminComponent implements OnInit {
 
   getCustomerData() {
 
-    this.api.get('customer/get_customer').then((data: any) => {
+    this.api.get('customer/get_allCustomer').then((data: any) => {
       // console.log('Data', data);
       this.total_customers=data.length;
       console.log("customer"+this.total_serviceProviders);

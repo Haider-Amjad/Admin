@@ -25,7 +25,8 @@
                 <h5 *ngIf="paymentStatus != null">Booking Type: {{orderData.bookingType}}</h5>
                 <h5 *ngIf="paymentStatus != null">Booking Date: {{orderData.date}}</h5>
                 <h5 *ngIf="paymentStatus != null">Booking Time: {{orderData.time}} </h5>
-                <h5 *ngIf="paymentStatus != null">Payment Status: {{paymentStatus}}</h5>
+                <h5 *ngIf="paymentStatus != null">Booking Price(USD): {{usdPrice}} </h5>
+                <h5 *ngIf="paymentStatus != null" style="color:#5E7606">Payment Status: {{paymentStatus}}</h5>
                 <h5 *ngIf="paymentStatus == paid">You have successfully made the payment for this order!!</h5>
                 <h5 *ngIf="invalidOrderIdText == 'invalid'">Invalid Order ID</h5>
                 <hr >
@@ -33,7 +34,6 @@
             </div>
                
       
-          
           <div class="row" style="margin-top: 20px;">
             
             <!-- <div class="col-md-1"></div> -->

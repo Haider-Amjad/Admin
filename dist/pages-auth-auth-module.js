@@ -152,7 +152,7 @@ var LoginComponent = /** @class */ (function () {
         this.helper = helper;
         this.isSubmitted = false;
         if (this.auth.isLoggedIn) {
-            this.router.navigateByUrl('dashboard/cashier');
+            this.router.navigateByUrl('dashboard/customer');
         }
     }
     LoginComponent.prototype.ngOnInit = function () {
@@ -172,7 +172,7 @@ var LoginComponent = /** @class */ (function () {
                         _this.router.navigateByUrl('dashboard/admin');
                     }
                     else if (_this.auth.user.role === 1) {
-                        _this.router.navigateByUrl('dashboard/cashier');
+                        _this.router.navigateByUrl('dashboard/customer');
                     }
                     else {
                         _this.helper.infoToast('Invalid User', 'Contact Administrator!');

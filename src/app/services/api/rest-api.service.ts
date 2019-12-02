@@ -54,25 +54,16 @@ export class RestApiService {
   }
 
 
-  getReport(path, data, name, type) {
+
+  getReport(path) {
 
     return new Promise((resolve, reject) => {
       const options = { responseType: 'blob' as 'json' }
-      this.http.post<Blob>(environment.reportURL + '/' + path, data, options).subscribe((file: any) => {
+      this.http.get<Blob>(environment.apiURL + '/' + path, options).subscribe((file: any) => {
 
         // console.log('start download:', file);
 
-        switch (type) {
-          case 'excel':
-            saveAs(file, name + '.xls');
-            break;
-          case 'word':
-            saveAs(file, name + '.doc');
-            break;
-          case 'pdf':
-            saveAs(file, name + '.pdf');
-            break;
-        }
+            saveAs(file, name + 'Booking Report');
 
         resolve(true);
 

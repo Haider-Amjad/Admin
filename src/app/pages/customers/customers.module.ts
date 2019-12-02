@@ -4,14 +4,17 @@ import { CommonModule } from '@angular/common';
 import { DataTablesModule } from 'angular-datatables';
 
 import { UsersRoutingModule } from './customers-routing.module';
+
 import { UsersListComponent } from './customers-list/customers-list.component';
 import { UsersAddComponent } from './customers-add/customers-add.component';
 import { UsersEditComponent } from './customers-edit/customers-edit.component';
+import { UsersBookingHistoryComponent } from './customers-booking-history/customers-booking-history.component';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [UsersListComponent, UsersAddComponent, UsersEditComponent],
+  declarations: [UsersListComponent, UsersAddComponent, UsersEditComponent, UsersBookingHistoryComponent],
   imports: [
     DataTablesModule,
     CommonModule,

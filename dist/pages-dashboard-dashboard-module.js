@@ -4959,7 +4959,7 @@ var DashboardAdminComponent = /** @class */ (function () {
     };
     DashboardAdminComponent.prototype.getCustomerData = function () {
         var _this = this;
-        this.api.get('customer/get_customer').then(function (data) {
+        this.api.get('customer/get_allCustomer').then(function (data) {
             // console.log('Data', data);
             _this.total_customers = data.length;
             console.log("customer" + _this.total_serviceProviders);

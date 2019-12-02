@@ -6,8 +6,8 @@ export const content: Routes = [
     loadChildren: './pages/dashboard/dashboard.module#DashboardModule'
   },
   {
-    path: 'users',
-    loadChildren: './pages/users/users.module#UsersModule'
+    path: 'service_provider',
+    loadChildren: './pages/service-provider/service-provider.module#ServiceProvidersModule'
   },
   {
     path: 'customers',

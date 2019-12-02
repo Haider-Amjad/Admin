@@ -5,13 +5,13 @@ import { HelperService } from '../../../services/helper/helper.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { UsersListComponent } from '../users-list/users-list.component';
+import { ServiceProvidersListComponent } from '../service-provider-list/service-provider-list.component';
 @Component({
-  selector: 'app-users-edit',
-  templateUrl: './users-edit.component.html',
-  styleUrls: ['./users-edit.component.scss']
+  selector: 'app-service-provider-edit',
+  templateUrl: './service-provider-edit.component.html',
+  styleUrls: ['./service-provider-edit.component.scss']
 })
-export class UsersEditComponent implements OnInit {
+export class ServiceProvidersEditComponent implements OnInit {
 
   submitted = false;
   isDataLoaded = false;
@@ -155,6 +155,11 @@ export class UsersEditComponent implements OnInit {
       }
     }
 
+  }
+
+  viewBookingHistory(serviceProviderEmail){
+    this.router.navigate(['service_provider/booking', serviceProviderEmail]);
+    this.activeModal.close();
   }
 
 

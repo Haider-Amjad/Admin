@@ -112,7 +112,7 @@ var ReportsModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Container-fluid starts -->\n<div class=\"container-fluid\">\n  <div class=\"page-header\">\n    <div class=\"row\">\n      <div class=\"col-lg-6\">\n        <h3>Service Provider (Booking Wise)\n          <small>Report</small>\n        </h3>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- Container-fluid Ends -->\n<iframe style=\"border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);\" width=\"100%\" height=\"480\" src=\"https://charts.mongodb.com/charts-project-0-avtkw/embed/charts?id=e9596d8d-63a8-4b17-b726-f63c65b467c4&tenant=f5d189e6-b0ab-44b0-aea0-a9190f6934f5\"></iframe>\n\n\n\n  <iframe style=\"border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);\" width=\"55%\" height=\"480\" src=\"https://charts.mongodb.com/charts-project-0-avtkw/embed/charts?id=9b89a391-fbe9-4479-a6d7-b0fed9277987&tenant=f5d189e6-b0ab-44b0-aea0-a9190f6934f5\"></iframe>\n\n  \n\n  <iframe style=\" margin-left:1.5%; border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);\" width=\"43.5%\" height=\"480\" src=\"https://charts.mongodb.com/charts-project-0-avtkw/embed/charts?id=0631b3d5-b77a-4a24-83c6-69cb03c00ef0&tenant=f5d189e6-b0ab-44b0-aea0-a9190f6934f5\"></iframe>\n\n\n\n\n\n\n"
+module.exports = "<!-- Container-fluid starts -->\n<div class=\"container-fluid\">\n  <div class=\"page-header\">\n    <div class=\"row\">\n      <div class=\"col-lg-6\">\n        <h3>Service Provider (Booking Wise)\n          <small>Report</small>\n        </h3>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- Container-fluid Ends -->\n<div style=\"text-align: center;\"> \n  \n    <img style=\"margin-top: 15px; margin-bottom: 15px;\" (click)=\"excelExport()\" src=\"https://img.icons8.com/dusk/128/000000/ms-excel.png\">\n    <h6 style=\"text-align: center !important; margin-top: 15px;\"> Click on the Excel icon, to Export all the Booking data in Excel Format</h6>\n  </div>\n<iframe style=\"border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);\" width=\"100%\" height=\"480\" src=\"https://charts.mongodb.com/charts-project-0-avtkw/embed/charts?id=e9596d8d-63a8-4b17-b726-f63c65b467c4&tenant=f5d189e6-b0ab-44b0-aea0-a9190f6934f5\"></iframe>\n\n\n\n  <iframe style=\"border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);\" width=\"55%\" height=\"480\" src=\"https://charts.mongodb.com/charts-project-0-avtkw/embed/charts?id=9b89a391-fbe9-4479-a6d7-b0fed9277987&tenant=f5d189e6-b0ab-44b0-aea0-a9190f6934f5\"></iframe>\n\n  \n\n  <iframe style=\" margin-left:1.5%; border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);\" width=\"43.5%\" height=\"480\" src=\"https://charts.mongodb.com/charts-project-0-avtkw/embed/charts?id=0631b3d5-b77a-4a24-83c6-69cb03c00ef0&tenant=f5d189e6-b0ab-44b0-aea0-a9190f6934f5\"></iframe>\n\n\n\n\n\n\n"
 
 /***/ }),
 
@@ -158,6 +158,13 @@ var BookingWise = /** @class */ (function () {
         this.helper = helper;
     }
     BookingWise.prototype.ngOnInit = function () {
+    };
+    BookingWise.prototype.excelExport = function () {
+        var _this = this;
+        this.api.getReport('bookingdetails/getBookingReport').then(function (response) {
+        }, function () {
+            _this.helper.successToast('Success!', 'Booking Data is Exported in Excel');
+        });
     };
     BookingWise = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

@@ -28,6 +28,7 @@ export class PaypalComponent implements OnInit {
   paymentStatus;
   orderData: any;
   invalidOrderIdText;
+  usdPrice;
 
     // Paypal Variables
     addScript: boolean = false;
@@ -57,7 +58,8 @@ export class PaypalComponent implements OnInit {
     this.api.get('bookingdetails/get_bookingDetailById/' + this.bookingId).then((response: any) => {
     
     this.orderData=response;      
-    this.paymentStatus = this.orderData.paymentStatus;  
+    this.paymentStatus = this.orderData.paymentStatus;
+    this.usdPrice = this.orderData.price;
     console.log("orderData"+this.orderData.paymentStatus)
     if(this.orderData.paymentStatus=="pending"){
       this.paymentOption();
@@ -145,7 +147,7 @@ export class PaypalComponent implements OnInit {
            payment: {
              transactions: [
               // Amount and Currency set
-               { amount: { total:this.orderData.price, currency: 'USD' } }
+               { amount: { total:this.usdPrice, currency: 'USD' } }
 
              ]
            }
@@ -158,7 +160,8 @@ export class PaypalComponent implements OnInit {
             //  this.jobPost.payment = 'paid';
             this.paymentStatus="paid"
              let paymentData = {
-              paymentStatus : 'paid'
+              paymentStatus : 'paid',
+              state:'accepted'
             }
              this.toastrService.success(
                "We have Successfully Processed your Payment",

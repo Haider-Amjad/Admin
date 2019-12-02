@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../../../services/api/rest-api.service';
 import { Router } from '@angular/router';
 import { HelperService } from '../../../services/helper/helper.service';
-import { UsersAddComponent } from '../users-add/users-add.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UsersEditComponent } from '../users-edit/users-edit.component';
+import { ServiceProvidersEditComponent } from '../service-provider-edit/service-provider-edit.component';
 
 @Component({
-  selector: 'app-users-list',
-  templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss']
+  selector: 'app-service-provider-list',
+  templateUrl: './service-provider-list.component.html',
+  styleUrls: ['./service-provider-list.component.scss']
 })
-export class UsersListComponent implements OnInit {
+export class ServiceProvidersListComponent implements OnInit {
 
   isDataLoaded = false;
   userId;
@@ -28,7 +27,6 @@ export class UsersListComponent implements OnInit {
     console.log("ngOnInit called")
     this.getUsers();
   }
-
 
   getUsers() {
     this.api.get('serviceProvider/get_serviceProvider').then((response: any) => {
@@ -65,6 +63,9 @@ export class UsersListComponent implements OnInit {
             else if (data === "blocked") {
               return '<span class="badge badge-pill badge-danger">Blocked</span>';
             }
+            else if (data === "away") {
+              return '<span class="badge badge-pill badge-dark">Away</span>';
+            }
             
           }
         }],
@@ -84,18 +85,13 @@ export class UsersListComponent implements OnInit {
     }).catch(err => console.log('Error', err));
   }
 
-  openAddModal() {
-    const modalRef = this.modalService.open(UsersAddComponent);
-
-    modalRef.result.then(() => { this.ngOnInit(); }, () => { this.ngOnInit(); });
-  }
 
   selectedUser(user) {
     this._openEditModal(user);
   }
 
   _openEditModal(user) {
-    const modalRef = this.modalService.open(UsersEditComponent);
+    const modalRef = this.modalService.open(ServiceProvidersEditComponent);
     modalRef.componentInstance.user = user;
 
     // modalRef.result.then(() => { window.location.reload() }, () => { window.location.reload()});

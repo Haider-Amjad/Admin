@@ -12,7 +12,7 @@ export class AuthService {
   user = undefined;
 
   isAdmin = false;
-  isCashier = false;
+  isCustomer = false;
 
   // user = {
   //   Locked: null,
@@ -75,7 +75,7 @@ export class AuthService {
     // Reset:
     this.isLoggedIn = false;
     this.isAdmin = false;
-    this.isCashier = false;
+    this.isCustomer = false;
     this.user = undefined;
     this.storage.removeUserDetails();
 
@@ -86,10 +86,10 @@ export class AuthService {
   roleCheck() {
     if (this.user.role === 0) {
       this.isAdmin = true;
-      this.isCashier = false;
+      this.isCustomer = false;
     } else {
       this.isAdmin = false;
-      this.isCashier = true;
+      this.isCustomer = true;
     }
   }
 }

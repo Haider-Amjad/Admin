@@ -10254,30 +10254,35 @@ Zone.__load_patch('PromiseRejectionEvent', function (global, Zone) {
 var map = {
 	"./pages/auth/auth.module": [
 		"./src/app/pages/auth/auth.module.ts",
-		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~a49575a5",
+		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~8756c3e1",
 		"pages-auth-auth-module"
 	],
 	"./pages/customers/customers.module": [
 		"./src/app/pages/customers/customers.module.ts",
-		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~a49575a5",
-		"default~pages-customers-customers-module~pages-users-users-module",
+		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~8756c3e1",
+		"default~pages-customers-customers-module~pages-service-provider-service-provider-module",
 		"pages-customers-customers-module"
 	],
 	"./pages/dashboard/dashboard.module": [
 		"./src/app/pages/dashboard/dashboard.module.ts",
-		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~a49575a5",
+		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~8756c3e1",
 		"pages-dashboard-dashboard-module"
+	],
+	"./pages/payment/payment.module": [
+		"./src/app/pages/payment/payment.module.ts",
+		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~8756c3e1",
+		"pages-payment-payment-module"
 	],
 	"./pages/reports/reports.module": [
 		"./src/app/pages/reports/reports.module.ts",
-		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~a49575a5",
+		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~8756c3e1",
 		"pages-reports-reports-module"
 	],
-	"./pages/users/users.module": [
-		"./src/app/pages/users/users.module.ts",
-		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~a49575a5",
-		"default~pages-customers-customers-module~pages-users-users-module",
-		"pages-users-users-module"
+	"./pages/service-provider/service-provider.module": [
+		"./src/app/pages/service-provider/service-provider.module.ts",
+		"default~pages-auth-auth-module~pages-customers-customers-module~pages-dashboard-dashboard-module~pag~8756c3e1",
+		"default~pages-customers-customers-module~pages-service-provider-service-provider-module",
+		"pages-service-provider-service-provider-module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -10875,23 +10880,13 @@ var RestApiService = /** @class */ (function () {
             });
         });
     };
-    RestApiService.prototype.getReport = function (path, data, name, type) {
+    RestApiService.prototype.getReport = function (path) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             var options = { responseType: 'blob' };
-            _this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].reportURL + '/' + path, data, options).subscribe(function (file) {
+            _this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiURL + '/' + path, options).subscribe(function (file) {
                 // console.log('start download:', file);
-                switch (type) {
-                    case 'excel':
-                        Object(file_saver__WEBPACK_IMPORTED_MODULE_5__["saveAs"])(file, name + '.xls');
-                        break;
-                    case 'word':
-                        Object(file_saver__WEBPACK_IMPORTED_MODULE_5__["saveAs"])(file, name + '.doc');
-                        break;
-                    case 'pdf':
-                        Object(file_saver__WEBPACK_IMPORTED_MODULE_5__["saveAs"])(file, name + '.pdf');
-                        break;
-                }
+                Object(file_saver__WEBPACK_IMPORTED_MODULE_5__["saveAs"])(file, name + 'Booking Report');
                 resolve(true);
             }, function (error) {
                 reject(error);
@@ -10964,7 +10959,7 @@ var AuthService = /** @class */ (function () {
         this.isLoggedIn = false;
         this.user = undefined;
         this.isAdmin = false;
-        this.isCashier = false;
+        this.isCustomer = false;
         // console.log('SavedUserDetails', this.storage.userDetails);
         if (this.storage.userDetails) {
             this.isLoggedIn = true;
@@ -10999,7 +10994,7 @@ var AuthService = /** @class */ (function () {
         // Reset:
         this.isLoggedIn = false;
         this.isAdmin = false;
-        this.isCashier = false;
+        this.isCustomer = false;
         this.user = undefined;
         this.storage.removeUserDetails();
         // Redirect:
@@ -11008,11 +11003,11 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.roleCheck = function () {
         if (this.user.role === 0) {
             this.isAdmin = true;
-            this.isCashier = false;
+            this.isCustomer = false;
         }
         else {
             this.isAdmin = false;
-            this.isCashier = true;
+            this.isCustomer = true;
         }
     };
     AuthService = __decorate([
@@ -11459,31 +11454,23 @@ var HeaderComponent = /** @class */ (function () {
 /*!******************************************************!*\
   !*** ./src/app/shared/menu/sidebar/sidebar-items.ts ***!
   \******************************************************/
-/*! exports provided: MenuItemsAdmin, MenuItemsCashier */
+/*! exports provided: MenuItemsAdmin, MenuItemsCustomer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MenuItemsAdmin", function() { return MenuItemsAdmin; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MenuItemsCashier", function() { return MenuItemsCashier; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MenuItemsCustomer", function() { return MenuItemsCustomer; });
 var MenuItemsAdmin = [
     {
         path: '/dashboard/admin', title: 'Dashboard', icon: 'icon-desktop', type: 'link'
     },
     {
         title: 'Management', icon: 'icon-package', type: 'sub', children: [
-            // { path: '/currencies/list', title: 'Currency Management', type: 'link' },
-            // { path: '/accounts/list', title: 'Account Management', type: 'link' },
-            { path: '/users/list', title: 'Service Provider Management', type: 'link' },
+            { path: '/service_provider/list', title: 'Service Provider Management', type: 'link' },
             { path: '/customers/list', title: 'Customers Management', type: 'link' }
         ]
     },
-    // {
-    //   path: '/dashboard/admin', title: 'GoAML(GoAML-SBPCSV-Body)', icon: 'icon-files', type: 'link'
-    // },
-    // {
-    //   path: '/dashboard/admin', title: 'SBP CSV(SBPCSV)', icon: 'icon-files', type: 'link'
-    // },
     {
         headTitle: 'Reports'
     },
@@ -11494,32 +11481,7 @@ var MenuItemsAdmin = [
         ]
     },
 ];
-var MenuItemsCashier = [
-// {
-//   path: '/dashboard/cashier', title: 'Dashboard', icon: 'icon-desktop', type: 'link'
-// },
-// {
-//   path: '/currencies/list', title: 'Rates', icon: 'icon-bar-chart', type: 'link'
-// },
-// {
-//   headTitle: 'Currency'
-// },
-// {
-//   path: '/transactions/bill', title: 'Bill Transaction', icon: 'icon-direction-alt', type: 'link'
-// },
-// {
-//   path: '/voucher/generate', title: 'Transfer Voucher', icon: 'icon-agenda', type: 'link'
-// },
-// {
-//   headTitle: 'Expenses'
-// },
-// {
-//   path: '/voucher/generate', title: 'Double Entry', icon: 'icon-agenda', type: 'link'
-// },
-// {
-//   path: '/voucher/generate', title: 'Journal Voucher', icon: 'icon-agenda', type: 'link'
-// }
-];
+var MenuItemsCustomer = [];
 
 
 /***/ }),
@@ -11531,7 +11493,7 @@ var MenuItemsCashier = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"sidebar-user text-center\">\n  <div>\n    <img class=\"img-50 rounded-circle\" src=\"assets/images/user/1.jpg\" alt=\"#\">\n  </div>\n  <h6 class=\"mt-3 f-12\"><span *ngIf=\"auth.isAdmin\">Admin</span><span *ngIf=\"auth.isCashier\">Cashier</span></h6>\n</div>\n<ul class=\"sidebar-menu\">\n  <!-- 1st level Menu -->\n  <li *ngFor=\"let menuItem of menuItems\">\n      <div class=\"sidebar-title\" *ngIf=\"menuItem.headTitle\">\n          {{menuItem.headTitle}}\n          <span class=\"badge badge-{{menuItem.badgeType}} pull-right\" *ngIf=\"menuItem.badgeType\">{{menuItem.badgeValue}}</span>\n      </div>\n      <!-- Sub -->\n      <a href=\"javascript:void(0)\" class=\"sidebar-header\" *ngIf=\"menuItem.type === 'sub'\">\n          <i [class]=\"menuItem.icon\"></i><span>{{menuItem.title}} <span class=\"badge badge-{{menuItem.badgeType}} ml-3\" *ngIf=\"menuItem.badgeType\">{{menuItem.badgeValue}}</span></span>\n          <i class=\"fa fa-angle-right pull-right\" *ngIf=\"menuItem.children\"></i>\n      </a>\n      <!-- Link -->\n      <a [routerLink]=\"!menuItem.type ? null : [menuItem.path]\" routerLinkActive=\"active\" class=\"sidebar-header\" *ngIf=\"menuItem.type === 'link'\">\n          <i [class]=\"menuItem.icon\"></i><span>{{menuItem.title}} <span class=\"badge badge-{{menuItem.badgeType}} ml-3\" *ngIf=\"menuItem.badgeType\">{{menuItem.badgeValue}}</span></span>\n          <i class=\"fa fa-angle-right pull-right\" *ngIf=\"menuItem.children\"></i>\n      </a>\n      <!-- External Link -->\n      <a href=\"{{ !menuItem.type ? null : menuItem.path }}\" class=\"sidebar-header\" *ngIf=\"menuItem.type === 'extLink'\">\n          <i [class]=\"menuItem.icon\"></i><span>{{menuItem.title}} <span class=\"badge badge-{{menuItem.badgeType}} ml-3\" *ngIf=\"menuItem.badgeType\">{{menuItem.badgeValue}}</span></span>\n          <i class=\"fa fa-angle-right pull-right\" *ngIf=\"menuItem.children\"></i>\n      </a>\n      <!-- External Tab Link -->\n      <a href=\"{{ !menuItem.type ? null : menuItem.path }}\" target=\"_blank\" class=\"sidebar-header\" *ngIf=\"menuItem.type === 'extTabLink'\">\n          <i [class]=\"menuItem.icon\"></i><span>{{menuItem.title}} <span class=\"badge badge-{{menuItem.badgeType}} ml-3\" *ngIf=\"menuItem.badgeType\">{{menuItem.badgeValue}}</span></span>\n          <i class=\"fa fa-angle-right pull-right\" *ngIf=\"menuItem.children\"></i>\n      </a>\n      <!-- 2nd Level Menu -->\n      <ul class=\"sidebar-submenu\" *ngIf=\"menuItem.children\">\n          <li *ngFor=\"let childrenItem of menuItem.children\">\n              <!-- Sub -->\n              <a href=\"javascript:void(0)\" *ngIf=\"childrenItem.type === 'sub'\">\n                <i class=\"fa fa-angle-right\"></i>{{childrenItem.title}} <span class=\"badge badge-{{childrenItem.badgeType}} pull-right\" *ngIf=\"childrenItem.badgeType\">{{childrenItem.badgeValue}}</span>\n                <i class=\"fa fa-angle-right pull-right\" *ngIf=\"childrenItem.children\"></i>\n              </a>\n              <!-- Link -->\n              <a [routerLink]=\"!childrenItem.type ? null : [childrenItem.path]\" *ngIf=\"childrenItem.type === 'link'\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n                <i class=\"fa fa-angle-right\"></i>{{childrenItem.title}} <span class=\"badge badge-{{childrenItem.badgeType}} pull-right\" *ngIf=\"childrenItem.badgeType\">{{childrenItem.badgeValue}}</span>\n                <i class=\"fa fa-angle-right pull-right\" *ngIf=\"childrenItem.children\"></i>\n              </a>\n              <!-- External Link -->\n              <a href=\"{{ !childrenItem.type ? null : childrenItem.path }}\" *ngIf=\"childrenItem.type === 'extLink'\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n                <i class=\"fa fa-angle-right\"></i>{{childrenItem.title}} <span class=\"badge badge-{{childrenItem.badgeType}} pull-right\" *ngIf=\"childrenItem.badgeType\">{{childrenItem.badgeValue}}</span>\n                <i class=\"fa fa-angle-right pull-right\" *ngIf=\"childrenItem.children\"></i>\n              </a>\n              <!-- External Tab Link -->\n              <a href=\"{{ !childrenItem.type ? null : childrenItem.path }}\" target=\"_blank\" *ngIf=\"childrenItem.type === 'extTabLink'\">\n                <i class=\"fa fa-angle-right\"></i>{{childrenItem.title}} <span class=\"badge badge-{{childrenItem.badgeType}} pull-right\" *ngIf=\"childrenItem.badgeType\">{{childrenItem.badgeValue}}</span>\n                <i class=\"fa fa-angle-right pull-right\" *ngIf=\"childrenItem.children\"></i>\n              </a>\n              <!-- 3rd Level Menu -->\n              <ul class=\"sidebar-submenu\" *ngIf=\"childrenItem.children\">\n                  <li *ngFor=\"let childrenSubItem of childrenItem.children\">\n                      <!-- Link -->\n                      <a [routerLink]=\"!childrenSubItem.type ? null : [childrenSubItem.path]\" *ngIf=\"childrenSubItem.type === 'link'\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n                          <i class=\"fa fa-angle-right\"></i>{{childrenSubItem.title}} <span class=\"badge badge-{{childrenSubItem.badgeType}} pull-right\" *ngIf=\"childrenSubItem.badgeType\">{{childrenSubItem.badgeValue}}</span>\n                      </a>\n                      <!-- External Link -->\n                      <a href=\"{{ !childrenSubItem.type ? null : childrenSubItem.path }}\" *ngIf=\"childrenSubItem.type === 'extLink'\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n                          <i class=\"fa fa-angle-right\"></i>{{childrenSubItem.title}} <span class=\"badge badge-{{childrenSubItem.badgeType}} pull-right\" *ngIf=\"childrenSubItem.badgeType\">{{childrenSubItem.badgeValue}}</span>\n                      </a>\n                      <!-- External Tab Link -->\n                      <a href=\"{{ !childrenSubItem.type ? null : childrenSubItem.path }}\" target=\"_blank\" *ngIf=\"childrenSubItem.type === 'extTabLink'\">\n                          <i class=\"fa fa-angle-right\"></i>{{childrenSubItem.title}} <span class=\"badge badge-{{childrenSubItem.badgeType}} pull-right\" *ngIf=\"childrenSubItem.badgeType\">{{childrenSubItem.badgeValue}}</span>\n                      </a>\n                  </li>\n              </ul>\n          </li>\n      </ul>\n  </li>\n</ul>\n<div class=\"sidebar-widget text-center\">\n  <div class=\"sidebar-widget-top\">\n      <h6 class=\"mb-2 fs-14\">Technical Support</h6>\n      <i class=\"icon-bell\"></i>\n  </div>\n  <div class=\"sidebar-widget-bottom p-20 m-20\">\n      <p>+92 314 5632169\n          <br>info@sportx.pk\n          <br>\n      </p>\n  </div>\n</div>\n\n"
+module.exports = "<div class=\"sidebar-user text-center\">\n  <div>\n    <img class=\"img-50 rounded-circle\" src=\"assets/images/user/1.jpg\" alt=\"#\">\n  </div>\n  <h6 class=\"mt-3 f-12\"><span *ngIf=\"auth.isAdmin\">Admin</span><span *ngIf=\"auth.isCustomer\">Cashier</span></h6>\n</div>\n<ul class=\"sidebar-menu\">\n  <!-- 1st level Menu -->\n  <li *ngFor=\"let menuItem of menuItems\">\n      <div class=\"sidebar-title\" *ngIf=\"menuItem.headTitle\">\n          {{menuItem.headTitle}}\n          <span class=\"badge badge-{{menuItem.badgeType}} pull-right\" *ngIf=\"menuItem.badgeType\">{{menuItem.badgeValue}}</span>\n      </div>\n      <!-- Sub -->\n      <a href=\"javascript:void(0)\" class=\"sidebar-header\" *ngIf=\"menuItem.type === 'sub'\">\n          <i [class]=\"menuItem.icon\"></i><span>{{menuItem.title}} <span class=\"badge badge-{{menuItem.badgeType}} ml-3\" *ngIf=\"menuItem.badgeType\">{{menuItem.badgeValue}}</span></span>\n          <i class=\"fa fa-angle-right pull-right\" *ngIf=\"menuItem.children\"></i>\n      </a>\n      <!-- Link -->\n      <a [routerLink]=\"!menuItem.type ? null : [menuItem.path]\" routerLinkActive=\"active\" class=\"sidebar-header\" *ngIf=\"menuItem.type === 'link'\">\n          <i [class]=\"menuItem.icon\"></i><span>{{menuItem.title}} <span class=\"badge badge-{{menuItem.badgeType}} ml-3\" *ngIf=\"menuItem.badgeType\">{{menuItem.badgeValue}}</span></span>\n          <i class=\"fa fa-angle-right pull-right\" *ngIf=\"menuItem.children\"></i>\n      </a>\n      <!-- External Link -->\n      <a href=\"{{ !menuItem.type ? null : menuItem.path }}\" class=\"sidebar-header\" *ngIf=\"menuItem.type === 'extLink'\">\n          <i [class]=\"menuItem.icon\"></i><span>{{menuItem.title}} <span class=\"badge badge-{{menuItem.badgeType}} ml-3\" *ngIf=\"menuItem.badgeType\">{{menuItem.badgeValue}}</span></span>\n          <i class=\"fa fa-angle-right pull-right\" *ngIf=\"menuItem.children\"></i>\n      </a>\n      <!-- External Tab Link -->\n      <a href=\"{{ !menuItem.type ? null : menuItem.path }}\" target=\"_blank\" class=\"sidebar-header\" *ngIf=\"menuItem.type === 'extTabLink'\">\n          <i [class]=\"menuItem.icon\"></i><span>{{menuItem.title}} <span class=\"badge badge-{{menuItem.badgeType}} ml-3\" *ngIf=\"menuItem.badgeType\">{{menuItem.badgeValue}}</span></span>\n          <i class=\"fa fa-angle-right pull-right\" *ngIf=\"menuItem.children\"></i>\n      </a>\n      <!-- 2nd Level Menu -->\n      <ul class=\"sidebar-submenu\" *ngIf=\"menuItem.children\">\n          <li *ngFor=\"let childrenItem of menuItem.children\">\n              <!-- Sub -->\n              <a href=\"javascript:void(0)\" *ngIf=\"childrenItem.type === 'sub'\">\n                <i class=\"fa fa-angle-right\"></i>{{childrenItem.title}} <span class=\"badge badge-{{childrenItem.badgeType}} pull-right\" *ngIf=\"childrenItem.badgeType\">{{childrenItem.badgeValue}}</span>\n                <i class=\"fa fa-angle-right pull-right\" *ngIf=\"childrenItem.children\"></i>\n              </a>\n              <!-- Link -->\n              <a [routerLink]=\"!childrenItem.type ? null : [childrenItem.path]\" *ngIf=\"childrenItem.type === 'link'\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n                <i class=\"fa fa-angle-right\"></i>{{childrenItem.title}} <span class=\"badge badge-{{childrenItem.badgeType}} pull-right\" *ngIf=\"childrenItem.badgeType\">{{childrenItem.badgeValue}}</span>\n                <i class=\"fa fa-angle-right pull-right\" *ngIf=\"childrenItem.children\"></i>\n              </a>\n              <!-- External Link -->\n              <a href=\"{{ !childrenItem.type ? null : childrenItem.path }}\" *ngIf=\"childrenItem.type === 'extLink'\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n                <i class=\"fa fa-angle-right\"></i>{{childrenItem.title}} <span class=\"badge badge-{{childrenItem.badgeType}} pull-right\" *ngIf=\"childrenItem.badgeType\">{{childrenItem.badgeValue}}</span>\n                <i class=\"fa fa-angle-right pull-right\" *ngIf=\"childrenItem.children\"></i>\n              </a>\n              <!-- External Tab Link -->\n              <a href=\"{{ !childrenItem.type ? null : childrenItem.path }}\" target=\"_blank\" *ngIf=\"childrenItem.type === 'extTabLink'\">\n                <i class=\"fa fa-angle-right\"></i>{{childrenItem.title}} <span class=\"badge badge-{{childrenItem.badgeType}} pull-right\" *ngIf=\"childrenItem.badgeType\">{{childrenItem.badgeValue}}</span>\n                <i class=\"fa fa-angle-right pull-right\" *ngIf=\"childrenItem.children\"></i>\n              </a>\n              <!-- 3rd Level Menu -->\n              <ul class=\"sidebar-submenu\" *ngIf=\"childrenItem.children\">\n                  <li *ngFor=\"let childrenSubItem of childrenItem.children\">\n                      <!-- Link -->\n                      <a [routerLink]=\"!childrenSubItem.type ? null : [childrenSubItem.path]\" *ngIf=\"childrenSubItem.type === 'link'\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n                          <i class=\"fa fa-angle-right\"></i>{{childrenSubItem.title}} <span class=\"badge badge-{{childrenSubItem.badgeType}} pull-right\" *ngIf=\"childrenSubItem.badgeType\">{{childrenSubItem.badgeValue}}</span>\n                      </a>\n                      <!-- External Link -->\n                      <a href=\"{{ !childrenSubItem.type ? null : childrenSubItem.path }}\" *ngIf=\"childrenSubItem.type === 'extLink'\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact: true}\">\n                          <i class=\"fa fa-angle-right\"></i>{{childrenSubItem.title}} <span class=\"badge badge-{{childrenSubItem.badgeType}} pull-right\" *ngIf=\"childrenSubItem.badgeType\">{{childrenSubItem.badgeValue}}</span>\n                      </a>\n                      <!-- External Tab Link -->\n                      <a href=\"{{ !childrenSubItem.type ? null : childrenSubItem.path }}\" target=\"_blank\" *ngIf=\"childrenSubItem.type === 'extTabLink'\">\n                          <i class=\"fa fa-angle-right\"></i>{{childrenSubItem.title}} <span class=\"badge badge-{{childrenSubItem.badgeType}} pull-right\" *ngIf=\"childrenSubItem.badgeType\">{{childrenSubItem.badgeValue}}</span>\n                      </a>\n                  </li>\n              </ul>\n          </li>\n      </ul>\n  </li>\n</ul>\n<div class=\"sidebar-widget text-center\">\n  <div class=\"sidebar-widget-top\">\n      <h6 class=\"mb-2 fs-14\">Technical Support</h6>\n      <i class=\"icon-bell\"></i>\n  </div>\n  <div class=\"sidebar-widget-bottom p-20 m-20\">\n      <p>+92 314 5632169\n          <br>info@sportx.com.pk\n          <br>\n      </p>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -11589,7 +11551,7 @@ var SidebarComponent = /** @class */ (function () {
             this.menuItems = _sidebar_items__WEBPACK_IMPORTED_MODULE_1__["MenuItemsAdmin"].filter(function (menuItem) { return menuItem; });
         }
         if (role === 1) {
-            this.menuItems = _sidebar_items__WEBPACK_IMPORTED_MODULE_1__["MenuItemsCashier"].filter(function (menuItem) { return menuItem; });
+            this.menuItems = _sidebar_items__WEBPACK_IMPORTED_MODULE_1__["MenuItemsCustomer"].filter(function (menuItem) { return menuItem; });
         }
     };
     SidebarComponent = __decorate([
@@ -11625,8 +11587,8 @@ var content = [
         loadChildren: './pages/dashboard/dashboard.module#DashboardModule'
     },
     {
-        path: 'users',
-        loadChildren: './pages/users/users.module#UsersModule'
+        path: 'service_provider',
+        loadChildren: './pages/service-provider/service-provider.module#ServiceProvidersModule'
     },
     {
         path: 'customers',
@@ -11655,6 +11617,10 @@ var full = [
     {
         path: 'auth',
         loadChildren: './pages/auth/auth.module#AuthModule'
+    },
+    {
+        path: 'payment',
+        loadChildren: './pages/payment/payment.module#PaymentModule'
     },
 ];
 
@@ -11758,7 +11724,7 @@ var environment = {
     production: false,
     // apiURL: 'http://localhost:3300',
     apiURL: 'https://sport-x.herokuapp.com',
-    reportURL: 'http://localhost:91/api/default'
+    reportURL: ''
 };
 
 

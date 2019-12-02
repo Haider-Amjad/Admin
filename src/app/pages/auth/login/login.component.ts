@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router, private helper: HelperService) {
     if (this.auth.isLoggedIn) {
-      this.router.navigateByUrl('dashboard/cashier');
+      this.router.navigateByUrl('dashboard/customer');
     }
   }
   ngOnInit() {
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           if (this.auth.user.role === 0) {
             this.router.navigateByUrl('dashboard/admin');
           } else if (this.auth.user.role === 1) {
-            this.router.navigateByUrl('dashboard/cashier');
+            this.router.navigateByUrl('dashboard/customer');
           } else {
             this.helper.infoToast('Invalid User', 'Contact Administrator!');
           }
